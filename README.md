@@ -4,15 +4,15 @@ This action reads your TODO or TODO.md file at the root of your repo and creates
 
 ## Inputs
 
-### `who-to-greet`
+### `path`
 
-**Required** The name of the person to greet. Default `"World"`.
+**Required** Path to TODO md. Default `"./TODO.md"`.
 
 ## Outputs
 
-### `time`
+### `issues`
 
-The time we greeted you.
+Number of issues created.
 
 ## Example usage
 
