@@ -45,7 +45,7 @@ const main = async () => {
       await octokit.issues.create({
         owner,
         repo,
-        title: list[i],
+        title: list[index],
       });
     }
     console.log(`Created ${list.length} issue(s)`);
