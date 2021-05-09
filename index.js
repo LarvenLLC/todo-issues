@@ -14,14 +14,36 @@ const main = async () => {
     const octokit = github.getOctokit(gitHubToken);
     // get content of TODO
     const content = await fs.readFile(path, "utf8");
-    core.setOutput("content", content);
+    console.log("content:", content);
 
-    // Get repo info
+    // get array of string lines from TODO file
+    const contents = content.split("\n");
+    // get todos from contents using "[ ] -" match
+    const todos = contents.filter((content) =>
+      content.match(/\s?\- \[ \]\s{0,}/)
+    );
+
+    // get repo info
     const { repository } = github.context.payload;
     const [owner, repo] = repository.full_name.split("/");
 
+    // get existing issues
+    const issues = await octokit.issues.listForRepo({
+      owner,
+      repo,
+      state: "open",
+    });
+
+    // list todos not found in issues
+    const list = issues.filter((issue) => todos.includes(issue.title));
+
+    // filter previously created issues
+    for (let index = 0; index < todos.length; index++) {
+      todos;
+    }
+
     // create issue
-    console.log("Creating issue");
+    console.log("Creating issues");
     await octokit.issues.create({
       owner,
       repo,
