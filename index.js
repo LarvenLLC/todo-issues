@@ -6,6 +6,8 @@ const main = async () => {
   try {
     // get github token
     const gitHubToken = core.getInput("repo-token", { required: true });
+    // get octokit
+    const octokit = github.getOctokit(gitHubToken);
     // get TODO path
     const path = core.getInput("path");
     // get content of TODO
