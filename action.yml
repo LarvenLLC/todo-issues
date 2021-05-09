@@ -1,10 +1,10 @@
 ame: "TODO-Issues"
 description: "Create issues from TODO.md"
 inputs:
-  who-to-greet: # id of input
-    description: "Who to greet"
+  path: # path of to
+    description: "Path to TODO file"
     required: true
-    default: "World"
+    default: "./TODO.md"
 outputs:
   time: # id of output
     description: "The time we greeted you"
