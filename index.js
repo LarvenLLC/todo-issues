@@ -3,8 +3,11 @@ const github = require("@actions/github");
 const { promises: fs } = require("fs");
 
 try {
+  // get github token
+  const gitHubToken = core.getInput("repo-token", { required: true });
+  // get TODO path
+  const path = core.getInput("path");
   const main = async () => {
-    const path = core.getInput("path");
     const content = await fs.readFile(path, "utf8");
     core.setOutput("content", content);
   };
@@ -16,6 +19,8 @@ try {
   // Get the JSON webhook payload for the event that triggered the workflow
   const payload = JSON.stringify(github.context.payload, undefined, 2);
   console.log(`The event payload: ${payload}`);
+  core.setOutput("issue", response.data.key);
 } catch (error) {
   core.setFailed(error.message);
+  process.exit(1);
 }
