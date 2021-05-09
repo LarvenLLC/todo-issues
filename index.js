@@ -4,15 +4,30 @@ const { promises: fs } = require("fs");
 
 const main = async () => {
   try {
+    /* INPUTS */
     // get github token
     const gitHubToken = core.getInput("repo-token", { required: true });
-    // get octokit
-    const octokit = github.getOctokit(gitHubToken);
     // get TODO path
     const path = core.getInput("path");
+
+    // get octokit
+    const octokit = github.getOctokit(gitHubToken);
     // get content of TODO
     const content = await fs.readFile(path, "utf8");
     core.setOutput("content", content);
+
+    // Get repo info
+    const { repository } = github.context.payload;
+    const [owner, repo] = repository.full_name.split("/");
+
+    // create issue
+    console.log("Creating issue");
+    await octokit.issues.create({
+      owner,
+      repo,
+      title,
+    });
+
     // `who-to-greet` input defined in action metadata file
     const nameToGreet = core.getInput("who-to-greet");
     console.log(`Hello ${nameToGreet}!`);
