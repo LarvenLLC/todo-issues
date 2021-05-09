@@ -13,8 +13,7 @@ const main = async () => {
     // get octokit
     const octokit = github.getOctokit(gitHubToken);
     // get content of TODO
-    const content = await fs.readFile(path, "utf8");
-    console.log("content:", content);
+    const {data: content} = await fs.readFile(path, "utf8");
 
     // get array of string lines from TODO file
     const contents = content.split("\n");
