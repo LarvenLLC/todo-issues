@@ -4,13 +4,13 @@ inputs:
   repo-token: # github token
     description: "Github repo token"
     required: true
-  path: # path of to
+  path: # path of todo
     description: "Path to TODO file"
     required: true
     default: "./TODO.md"
 outputs:
-  time: # id of output
-    description: "The time we greeted you"
+  issues: # number of issues created
+    description: "The number of issues created"
 runs:
   using: "node14"
   main: "index.js"
