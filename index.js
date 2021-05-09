@@ -49,6 +49,7 @@ const main = async () => {
       });
     }
     console.log(`Created ${list.length} issue(s)`);
+
     // output
     core.setOutput("New issues", list.length);
   } catch (error) {
