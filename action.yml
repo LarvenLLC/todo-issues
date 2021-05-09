@@ -1,6 +1,9 @@
 ame: "TODO-Issues"
 description: "Create issues from TODO.md"
 inputs:
+  repo-token: # github token
+    description: "Github repo token"
+    required: true
   path: # path of to
     description: "Path to TODO file"
     required: true
