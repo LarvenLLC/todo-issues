@@ -1,7 +1,13 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
+const { promises: fs } = require("fs");
 
 try {
+  const main = async () => {
+    const path = core.getInput("path");
+    const content = await fs.readFile(path, "utf8");
+    core.setOutput("content", content);
+  };
   // `who-to-greet` input defined in action metadata file
   const nameToGreet = core.getInput("who-to-greet");
   console.log(`Hello ${nameToGreet}!`);
