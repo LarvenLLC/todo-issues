@@ -28,37 +28,29 @@ const main = async () => {
     const [owner, repo] = repository.full_name.split("/");
 
     // get existing issues
-    const issues = await octokit.issues.listForRepo({
+    const issueList = await octokit.issues.listForRepo({
       owner,
       repo,
       state: "open",
     });
+    // existing issue titles
+    const issues = issueList.map((issue) => issue.title);
 
-    // list todos not found in issues
-    const list = issues.filter((issue) => todos.includes(issue.title));
+    // list todos not found in issues (filter previously created issues)
+    const list = [...new Set([...todos, ...issues])];
 
-    // filter previously created issues
-    for (let index = 0; index < todos.length; index++) {
-      todos;
+    // creating issue(s)
+    console.log(`Creating ${list.length} issue(s)`);
+    for (let index = 0; index < list.length; index++) {
+      await octokit.issues.create({
+        owner,
+        repo,
+        title: list[i],
+      });
     }
-
-    // create issue
-    console.log("Creating issues");
-    await octokit.issues.create({
-      owner,
-      repo,
-      title,
-    });
-
-    // `who-to-greet` input defined in action metadata file
-    const nameToGreet = core.getInput("who-to-greet");
-    console.log(`Hello ${nameToGreet}!`);
-    const time = new Date().toTimeString();
-    core.setOutput("time", time);
-    // Get the JSON webhook payload for the event that triggered the workflow
-    const payload = JSON.stringify(github.context.payload, undefined, 2);
-    console.log(`The event payload: ${payload}`);
-    core.setOutput("issue", response.data.key);
+    console.log(`Created ${list.length} issue(s)`);
+    // output
+    core.setOutput("New issues", list.length);
   } catch (error) {
     core.setFailed(error.message);
     process.exit(1);
