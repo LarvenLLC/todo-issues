@@ -13,7 +13,8 @@ const main = async () => {
     // get octokit
     const octokit = github.getOctokit(gitHubToken);
     // get content of TODO
-    const {data: content} = await fs.readFile(path, "utf8");
+    const {content} = await fs.readFile(path, "utf8");
+    console.log("content:", content);
 
     // get array of string lines from TODO file
     const contents = content.split("\n");
@@ -27,12 +28,11 @@ const main = async () => {
     const [owner, repo] = repository.full_name.split("/");
 
     // get existing issues
-    const issueList = await octokit.issues.listForRepo({
+    const {data: issueList} = await octokit.issues.listForRepo({
       owner,
       repo,
       state: "open",
     });
-    console.log(issueList)
     // existing issue titles
     const issues = issueList.map((issue) => issue.title);
 
