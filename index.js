@@ -8,7 +8,7 @@ const main = async () => {
     const gitHubToken = core.getInput("repo-token", { required: true });
     // get TODO path
     const path = core.getInput("path");
-
+    // get content of TODO
     const content = await fs.readFile(path, "utf8");
     core.setOutput("content", content);
     // `who-to-greet` input defined in action metadata file
