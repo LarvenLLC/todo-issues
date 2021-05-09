@@ -33,6 +33,7 @@ const main = async () => {
       repo,
       state: "open",
     });
+    console.log(issueList)
     // existing issue titles
     const issues = issueList.map((issue) => issue.title);
 
