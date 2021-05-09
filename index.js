@@ -51,7 +51,7 @@ const main = async () => {
     console.log(`Created ${list.length} issue(s)`);
 
     // output
-    core.setOutput("New issues", list.length);
+    core.setOutput("issues", list.length);
   } catch (error) {
     core.setFailed(error.message);
     process.exit(1);
