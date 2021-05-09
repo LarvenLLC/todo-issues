@@ -1,10 +1,10 @@
-ame: "TODO to Issues"
+ame: "TODO-Issues"
 description: "Create issues from TODO.md"
 inputs:
-  TOKEN: # github token
+  repo-token: # github token
     description: "Github repo token"
     required: true
-  PATH: # path of todo
+  path: # path of todo
     description: "Path to TODO file"
     required: true
     default: "./TODO.md"
@@ -12,5 +12,5 @@ outputs:
   issues: # number of issues created
     description: "The number of issues created"
 runs:
-  using: "node14"
+  using: "node12"
   main: "index.js"
