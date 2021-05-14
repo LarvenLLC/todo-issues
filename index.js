@@ -23,6 +23,9 @@ const main = async () => {
       content.match(/\s?\- \[ \]\s{0,}/)
     );
     // remove brackets "[ ] -"
+    if(!matches || !matches.length) {
+      return;
+    }
     const todos = matches.map((match) => match.replace(/\s?\- \[ \]\s{0,}/, ""))
 
     // get repo info
