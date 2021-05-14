@@ -6,7 +6,7 @@ This action reads your TODO or TODO.md file at the root of your repo and creates
 
 ### `path`
 
-**Required** Path to TODO md. Default `"./TODO.md"`.
+**Required** Path to TODO.md or TODO => Default `"./TODO"`.
 
 ## Outputs
 
@@ -16,6 +16,24 @@ Number of issues created.
 
 ## Example usage
 
-uses: actions/hello-world-javascript-action@v1.1
-with:
-who-to-greet: 'Mona the Octocat'
+```
+name: "Workflow"
+on: [push]
+
+jobs:
+  todo_issues:
+    runs-on: ubuntu-latest
+    name: A job to create issues from todos
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Get todos action step
+        id: issue
+        uses: LarvenLLC/todo-issues@v1.6
+        with:
+          repo-token: ${{ secrets.GH_TOKEN }}
+          path: "./TODO"
+      # Use the output from the `issue` step
+      - name: Get the number of issues created
+        run: echo "Created ${{ steps.issue.outputs.issues }} issue(s)"
+```
