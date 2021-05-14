@@ -26,7 +26,7 @@ const main = async () => {
     if(!matches || !matches.length) {
       return;
     }
-    const todos = matches.map((match) => match.replace(/\s?\- \[ \]\s{0,}/, ""))
+    const todos = matches.map((match) => match.replace(/\s?\- \[ \]\s{0,}/, "")).filter(Boolean)
 
     // get repo info
     const { repository } = github.context.payload;
