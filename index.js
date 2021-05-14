@@ -19,9 +19,11 @@ const main = async () => {
     // get array of string lines from TODO file
     const contents = content.split("\n");
     // get todos from contents using "[ ] -" match
-    const todos = contents.filter((content) =>
+    const matches = contents.filter((content) =>
       content.match(/\s?\- \[ \]\s{0,}/)
     );
+    // remove brackets "[ ] -"
+    const todos = matches.map((match) => match.replace(/\s?\- \[ \]\s{0,}/, ""))
 
     // get repo info
     const { repository } = github.context.payload;
