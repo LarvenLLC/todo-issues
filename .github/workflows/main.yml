@@ -13,7 +13,7 @@ jobs:
         uses: LarvenLLC/todo-issues@v1.6
         with:
           repo-token: ${{ secrets.GH_TOKEN }}
-          path: "./todo.md"
+          path: "./todo"
       # Use the output from the `issue` step
       - name: Get the number of issues created
         run: echo "Created ${{ steps.issue.outputs.issues }} issue(s)"
