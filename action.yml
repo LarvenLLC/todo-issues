@@ -1,5 +1,8 @@
 name: 'TODO-Issues'
 description: 'Create issues from TODO'
+branding:
+  icon: 'check-square'
+  color: white
 inputs:
   repo-token:
     description: 'Github repo token'
